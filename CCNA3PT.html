@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>711Practical.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="711-networking-practical-test">711 Networking Practical test</h1>
+<ul>
+<li><a href="#711-networking-practical-test">711 Networking Practical test</a>
+<ul>
+<li><a href="#basic-settings-for-router">Basic Settings for Router</a></li>
+<li><a href="#basic-settings-for-switch">Basic Settings for Switch</a></li>
+<li><a href="#vlan">VLAN</a>
+<ul>
+<li><a href="#show-commands">Show commands</a></li>
+<li><a href="#router-on-stick">Router on stick</a></li>
+</ul>
+</li>
+<li><a href="#ospfv2">OSPFv2</a></li>
+<li><a href="#eigrp">EIGRP</a>
+<ul>
+<li><a href="#eigrp-for-ipv4">EIGRP for IPv4</a></li>
+<li><a href="#eigrp-for-ipv6">EIGRP for IPv6</a></li>
+</ul>
+</li>
+<li><a href="#acl">ACL</a>
+<ul>
+<li><a href="#standard-acl">Standard ACL</a>
+<ul>
+<li><a href="#standard-numbered-access-list">Standard numbered Access-List</a></li>
+<li><a href="#named-access-list">Named Access-List</a></li>
+<li><a href="#show-commands-for-acl">show commands for ACL</a></li>
+</ul>
+</li>
+<li><a href="#extended-acl">Extended ACL</a></li>
+</ul>
+</li>
+<li><a href="#nat">NAT</a>
+<ul>
+<li><a href="#configuring-static-nat">Configuring static NAT</a></li>
+<li><a href="#configuring-dynamic-nat">Configuring dynamic NAT</a></li>
+</ul>
+</li>
+<li><a href="#staticdefault-route">Static/Default route</a></li>
+<li><a href="#ssh-config">SSH Config</a></li>
+<li><a href="#port-security-config">Port Security Config</a></li>
+<li><a href="#ppp-auth">PPP Auth</a></li>
+<li><a href="#bgp">BGP</a></li>
+<li><a href="#dhcp-config">DHCP Config</a>
+<ul>
+<li><a href="#ipv4-dhcp-config">IPv4 DHCP Config</a></li>
+<li><a href="#ipv6-dhcp-config">IPv6 DHCP Config</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="basic-settings-for-router">Basic Settings for Router</h2>
+<pre class="hljs"><code><div>router(config)# hostname R1
+R1(config)# no ip domain lookup
+R1(config)# enable secret class
+R1(config)# line console 0
+R1(config-line)# password cisco
+R1(config-line)# login
+R1(config)# login synchronous
+R1(config)# line vty 0 4
+R1(config-line)# password cisco
+R1(config-line)# login
+R1(config)# service password-encryption
+R1(config)# banner motd $ Authorized Users Only! $
+R1# copy running-config startup-config
+</div></code></pre>
+<h2 id="basic-settings-for-switch">Basic Settings for Switch</h2>
+<pre class="hljs"><code><div>switch(config)# hostname S1
+S1(config)# no ip domain lookup
+S1(config)# enable secret class
+S1(config)# line console 0
+S1(config-line)# password cisco
+S1(config-line)# login
+S1(config)# line vty 0 15
+S1(config-line)# password cisco
+S1(config-line)# login
+S1(config)# service password-encryption
+S1(config)# banner motd $ Authorized Users Only! $
+S1# copy running-config startup-config
+</div></code></pre>
+<hr>
+<h2 id="vlan">VLAN</h2>
+<p>Creating vlan</p>
+<pre class="hljs"><code><div>S2(config)#vlan 10
+S2(config-vlan)#name Faculty/Staff
+</div></code></pre>
+<p>Assigning vlan to int</p>
+<pre class="hljs"><code><div>S2(config)# interface f0/11
+S2(config-if)# switchport mode access
+S2(config-if)# switchport access vlan 10
+</div></code></pre>
+<p>Assinging voice vlan to int</p>
+<pre class="hljs"><code><div>S3(config)# interface f0/11
+S3(config-if)# mls qos trust cos
+S3(config-if)# switchport voice vlan 150
+</div></code></pre>
+<h3 id="show-commands">Show commands</h3>
+<pre class="hljs"><code><div>S2# show vlan brief
+</div></code></pre>
+<h3 id="router-on-stick">Router on stick</h3>
+<p>on router</p>
+<pre class="hljs"><code><div>R1(config)#interface g0/0
+R1(config-if)#no shutdown
+R1(config)# int g0/0.10
+R1(config-subif)# encapsulation dot1Q 10
+R1(config-subif)# ip address 172.17.10.1 255.255.255.0
+R(config)# [no] ip classless
+</div></code></pre>
+<p>on switch</p>
+<pre class="hljs"><code><div>S1(config)#int g0/1
+S1(config-if)#switchport mode trunk
+</div></code></pre>
+<p>on trunk port in switch</p>
+<pre class="hljs"><code><div>S1(config)#int g0/1
+S1(config-if)#switchport mode trunk
+</div></code></pre>
+<p>to change <strong>native vlan</strong></p>
+<pre class="hljs"><code><div>Switch(config-if)# switchport trunk native vlan 10
+</div></code></pre>
+<p>to specify what <strong>vlans allowed</strong></p>
+<pre class="hljs"><code><div>Switch(config-if)# switchport trunk allowed vlan 10,20,30
+</div></code></pre>
+<hr>
+<h2 id="ospfv2">OSPFv2</h2>
+<p>Configuring <strong>OSPF</strong></p>
+<pre class="hljs"><code><div>R1(config)# router ospf 56
+R1(config-router)# router-id 1.1.1.1
+R1(config-router)# network 10.53.0.0 0.0.0.3 area 0
+</div></code></pre>
+<p>Configure the interface G0/0/1 OSPF <strong>priority to 50 to ensure R1 is the <em>Designated Router.</em></strong></p>
+<pre class="hljs"><code><div>R1(config)# interface g0/0/1
+R1(config-if)# ip ospf priority 50
+</div></code></pre>
+<p>Configure the <strong>OSPF timers</strong> on the G0/0/1 of each router for a <em><strong>hello timer of 30 seconds</strong></em></p>
+<pre class="hljs"><code><div>R1(config)# interface g0/0/1
+R1(config-if)# ip ospf hello-interval 30
+</div></code></pre>
+<p>OSPF to treat R2 Loopback 1 like a <strong>point-to-point</strong> network</p>
+<pre class="hljs"><code><div>R2(config)# interface loopback 1
+R2(config-if)# ip ospf network point-to-point
+</div></code></pre>
+<p>Configure <strong>passive interface</strong> on OSPF.</p>
+<pre class="hljs"><code><div>R2(config)# router ospf 56
+R2(config-router)# passive-interface loopback 1
+</div></code></pre>
+<p>Configure OSPF to <strong>propagate the default route</strong> in OSPF routing updates.</p>
+<pre class="hljs"><code><div>R2(config)# router ospf 1
+R2(config-router)# default-information originate
+</div></code></pre>
+<p>Change the <strong>reference <em>bandwidth</em> on each router to 1Gbs</strong> (1Gbs = 1000Mbs) &amp; Have to change on both routers to be <em>consistant</em></p>
+<pre class="hljs"><code><div>R1(config)# router ospf 56
+R1(config-router)# auto-cost reference-bandwidth 1000
+</div></code></pre>
+<p>Following commands help <strong>verifying</strong> OSPF configurations</p>
+<pre class="hljs"><code><div>show ip interface brief
+show ip route
+show ip route ospf
+show ip ospf neighbor
+show ip protocols
+show ip ospf
+show ip ospf interface g0/0/1
+</div></code></pre>
+<hr>
+<h2 id="eigrp">EIGRP</h2>
+<h3 id="eigrp-for-ipv4">EIGRP for IPv4</h3>
+<p>Configuring <em>EIGRP on routers</em></p>
+<blockquote>
+<p><strong>NOTE</strong> Need to be configured on all routers</p>
+</blockquote>
+<pre class="hljs"><code><div>R1(config)# router eigrp 1
+R1(config-router)# eigrp router-id 1.1.1.1
+R1(config-router)# network 172.16.1.0 0.0.0.3
+
+</div></code></pre>
+<p>Configuring <em>passive interfaces</em></p>
+<pre class="hljs"><code><div>R1(config)# router eigrp 1
+R1(config-router)# passive-interface g0/0
+</div></code></pre>
+<p>Disabling <em>auto summary</em></p>
+<pre class="hljs"><code><div>R1(config)# router eigrp 1
+R1(config-router)# no auto-summary
+</div></code></pre>
+<p>Configuring <em>bandwidth</em></p>
+<blockquote>
+<p><strong>NOTE</strong> need to be configured both ends of the connection.</p>
+</blockquote>
+<pre class="hljs"><code><div>R2(config)# interface s0/0/0
+R2(config-if)# bandwidth 2000
+</div></code></pre>
+<h3 id="eigrp-for-ipv6">EIGRP for IPv6</h3>
+<p>Enable <em>ipv6</em> routing</p>
+<pre class="hljs"><code><div>R1(config)# ipv6 unicast-routing
+</div></code></pre>
+<p>Configuring <em>ipv6 addresses</em> on each interfaces in router</p>
+<blockquote>
+<p>Normally link local address automatically configured unless changed.
+Clock rate command is optional</p>
+</blockquote>
+<pre class="hljs"><code><div>int g0/0/0
+ipv6 add 2001:sd8:sgfsfs:1::1/64
+ipv6 add fe80::1 link-local
+clock rate 64000
+</div></code></pre>
+<p>Enable <em>EIGRP for IPv6</em> routing</p>
+<pre class="hljs"><code><div>R1(config)# ipv6 router eigrp 1
+R1(config-rtr)# no shutdown
+R1(config-rtr)# eigrp router-id 1.1.1.1
+</div></code></pre>
+<p>Configuring EIGRP in each <em>interface</em></p>
+<pre class="hljs"><code><div>R1(config)# int g0/0
+R1(config-if)# ipv6 eigrp 
+</div></code></pre>
+<p>Configuring passive interfaces</p>
+<pre class="hljs"><code><div>R1(config)# ipv6 router eigrp 1
+R1(config-rtr)# passive-interface g0/
+</div></code></pre>
+<hr>
+<h2 id="acl">ACL</h2>
+<h3 id="standard-acl">Standard ACL</h3>
+<h4 id="standard-numbered-access-list">Standard numbered Access-List</h4>
+<p>Creating standard Access List</p>
+<pre class="hljs"><code><div>R3(config)# access-list 1 remark Allow R1 LANs Access
+R3(config)# access-list 1 permit 192.168.10.0 0.0.0.255
+R3(config)# access-list 1 permit 192.168.20.0 0.0.0.255
+R3(config)# access-list 1 deny an
+</div></code></pre>
+<p>Assigning access list to interfaces</p>
+<pre class="hljs"><code><div>R3(config)# interface g0/0/0
+R3(config-if)# ip access-group 1 out
+</div></code></pre>
+<h4 id="named-access-list">Named Access-List</h4>
+<p>Creating <em>named</em> access list</p>
+<pre class="hljs"><code><div>R1(config)# ip access-list standard BRANCH-OFFICE-POLICY
+R1(config-std-nacl)# permit host 192.168.30.3
+R1(config-std-nacl)# permit 192.168.40.0 0.0.0.255
+R1(config-std-nacl)# end
+</div></code></pre>
+<p>Assigning named access list to interfaces</p>
+<pre class="hljs"><code><div>R1(config)# interface g0/0/0
+R1(config-if)# ip access-group BRANCH-OFFICE-POLICY ou
+</div></code></pre>
+<h4 id="show-commands-for-acl">show commands for ACL</h4>
+<p>To verify configurations</p>
+<pre class="hljs"><code><div>R3# show access-lists 1
+R3# show access-lists
+R3# show ip access-lists
+R3# show ip interface g0/0/0
+R3# show ip interface
+</div></code></pre>
+<h3 id="extended-acl">Extended ACL</h3>
+<p>Creating Extended ACL</p>
+<blockquote>
+<p>Have to input <code>permit ip any any</code> at the end if want to permit other becasue in default there is <code>deny any</code> on ACL</p>
+</blockquote>
+<pre class="hljs"><code><div>RT1(config)# ip access-list extended acl-name
+RT1(config-ext-nacl)# deny tcp host 172.31.1.101 host 64.101.255.254 eq 80
+RT1(config-ext-nacl)# deny icmp host 172.31.1.103 host 64.103.255.254
+RT1(config-ext-nacl)# permit ip any any
+RT1(config)# interface g0/0
+RT1(config-f)# ip access-group ACL in
+</div></code></pre>
+<hr>
+<h2 id="nat">NAT</h2>
+<h3 id="configuring-static-nat">Configuring static NAT</h3>
+<pre class="hljs"><code><div>R(config)# ip nat inside source static 192.168.1.10 209.73.69.10
+</div></code></pre>
+<h3 id="configuring-dynamic-nat">Configuring dynamic NAT</h3>
+<pre class="hljs"><code><div>R(config)# ip nat pool NAT-POOL 209.73.69.0 209.73.69.9 netmask 255.255.255.0
+R(config)# ip access-list standard NAT-ACL
+R(config-std-nacl)# permit 192.168.1.0 255.255.255.0
+R(config-std-nacl)# deny any
+R(config)# ip nat inside source list NAT-ACL pool NAT-POOL overload
+</div></code></pre>
+<hr>
+<h2 id="staticdefault-route">Static/Default route</h2>
+<p>assigning <strong>default route</strong></p>
+<blockquote>
+<p>Can also use the ip address of the interface</p>
+</blockquote>
+<pre class="hljs"><code><div>R2(config)# ip route 0.0.0.0 0.0.0.0 Serial0/1/0
+
+R(config)# ip route 192.168.20.0 255.255.255.0 serial0/1
+</div></code></pre>
+<hr>
+<h2 id="ssh-config">SSH Config</h2>
+<p>Description</p>
+<pre class="hljs"><code><div>R(config)# hostname {hostname}
+R(config)# username {username} password {password}
+R(config)# ip domain-name {domain-name}
+R(config)# crypto key generate rsa
+R(config)# ip ssh version 2
+R(config)# line vty 0 15
+R(config-line)# login local
+R(config-line)# transport input ssh
+
+</div></code></pre>
+<p>Actual configuration</p>
+<pre class="hljs"><code><div>R(config)# hostname R1
+R(config)# username Cisco password Password-123
+R(config)# ip domain-name anything.com
+R(config)# crypto key generate rsa
+R(config)# ip ssh version 2
+R(config)# line vty 0 15
+R(config-line)# login local
+R(config-line)# transport input ssh
+</div></code></pre>
+<hr>
+<h2 id="port-security-config">Port Security Config</h2>
+<p>Description</p>
+<pre class="hljs"><code><div>S(config)# interface {interface | range {interface}{interface-start}-{interface-end}}
+S(config-if)# switchport mode access
+S(config-if)# switchport port-security
+S(config-if)# switchport port-security maximum {number}
+S(config-if)# switchport port-security mac-address sticky
+S(config-if)# switchport port-security violation {restrict | protect | shutdown}
+S(config-if)# switchport protected
+S(config-if)# spanning-tree bpduguard enable
+S(config-if)# shutdown
+S(config-if)# no shutdown
+S# show port-security interface {interface}
+
+</div></code></pre>
+<p>Actual configuration</p>
+<pre class="hljs"><code><div>S(config)# interface interface range f0/1-24,g0/1-2
+S(config-if)# switchport mode access
+S(config-if)# switchport port-security
+S(config-if)# switchport port-security maximum 25
+S(config-if)# switchport port-security mac-address sticky
+S(config-if)# switchport port-security violation shutdown
+S(config-if)# switchport protected
+S(config-if)# spanning-tree bpduguard enable
+S(config-if)# shutdown
+S(config-if)# no shutdown
+S# show port-security interface f0/1
+</div></code></pre>
+<hr>
+<h2 id="ppp-auth">PPP Auth</h2>
+<p>Desription</p>
+<pre class="hljs"><code><div>R(config)# username {pap-neighbor-username | chap-neighbor-hostname} password {neighbor-password}
+R(config)# interface {interface-to-neighbor}
+R(config-if)# encapsulation ppp
+R(config-if)# ppp authentication {pap | chap | pap chap | chap pap}
+R(config-if (pap))# ppp pap sent-username {your-username} password {your-password}
+</div></code></pre>
+<p>Actual configuration</p>
+<pre class="hljs"><code><div>R(config)# username R2 password R2Password
+R(config)# interface S0/0/0
+R(config-if)# encapsulation ppp
+R(config-if)# ppp authentication pap
+R(config-if)# ppp pap sent-username R1 password R1Password
+</div></code></pre>
+<hr>
+<h2 id="bgp">BGP</h2>
+<p>Desription</p>
+<pre class="hljs"><code><div>R(config)# router bgp {autonomous-system-number}
+R(config-router)# neighbor {neighbor-ip-address} remote-as {neighbor-autonomous-system-number}
+R(config-router)# network {internal-network} [mask {subnet-mask}]
+</div></code></pre>
+<p>Actual configuration</p>
+<pre class="hljs"><code><div>R(config)# router bgp 65000
+R(config-router)# neighbor 209.165.201.1 remote-as 65001
+R(config-router)# network 198.133.219.0 mask 255.255.255.0
+</div></code></pre>
+<hr>
+<h2 id="dhcp-config">DHCP Config</h2>
+<h3 id="ipv4-dhcp-config">IPv4 DHCP Config</h3>
+<p>Desription</p>
+<pre class="hljs"><code><div>R1(config)# ip dhcp excluded {excluded-start-ip} {excluded-end-ip}
+R1(config)# ip dhcp pool {pool-name}
+R1(dhcp-config)# network {allowed-network-address} {subnet-mask}
+R1(dhcp-config)# default-router {default-gateway}
+R1(dhcp-config)# dns-server {dns-server-address (up to 4)}
+R1(dhcp-config)# domain-name {domain-name}
+R1(dhcp-config)# lease-time {days}
+
+R3(config)# interface {interface}
+R3(config-if)# ip helper-address {dhcp-server-address}
+
+</div></code></pre>
+<p>Actual configuration</p>
+<pre class="hljs"><code><div>R1# show ip dhcp binding
+
+R1(config)# ip dhcp excluded 172.16.2.1 172.16.2.6
+R1(config)# ip dhcp pool R1-DHCP
+R1(dhcp-config)# network 172.16.2.0 255.255.255.128
+R1(dhcp-config)# default-router 172.16.2.1
+R1(dhcp-config)# dns-server 140.198.8.14
+R1(dhcp-config)# domain-name anything.com
+R1(dhcp-config)# lease-time 5
+
+R3(config)# interface fastethernet 0/1
+R3(config-if)# ip helper-address 192.168.15.2
+</div></code></pre>
+<hr>
+<h3 id="ipv6-dhcp-config">IPv6 DHCP Config</h3>
+<p>Desription</p>
+<blockquote>
+<p>Stateless Address Auto Config (SLAAC)</p>
+</blockquote>
+<pre class="hljs"><code><div>R(config)# ipv6 unicast routing
+R(config)# ipv6 dhcp pool {pool-name}
+R(dhcpv6-config)# dns-server {ipv6-dns-server-address}
+R(dhcpv6-config)# domain-name {domain-name}
+R(config)# interface {interface}
+R(config-if)# ipv6 address {ip-address}{prefix-length}
+R(config-if)# ipv6 dhcp server {pool-name}
+R(config-if)# ipv6 nd other-config-flag
+</div></code></pre>
+<blockquote>
+<p>Stateful Address Auto Config</p>
+</blockquote>
+<pre class="hljs"><code><div>R1(config)# ipv6 unicast routing
+R1(config)# ipv6 dhcp pool {pool-name}
+R1(dhcpv6-config)# address prefix {ipv6-prefix} [lifetime {preferred-lifetime} {valid-lifetime}]
+R1(dhcpv6-config)# dns-server {ipv6-dns-server-address}
+R1(dhcpv6-config)# domain-name {domain-name}
+R1(config)# interface {interface}
+R1(config-if)# ipv6 address {ipv6-address}
+R1(config-if)# ipv6 dhcp server {pool-name}
+R1(config-if)# ipv6 nd managed-config-flag
+
+</div></code></pre>
+<p>Actual configuration</p>
+<pre class="hljs"><code><div>R3(config)# interface fastethernet 0/1
+R3(config-if)# ip dhcp relay destination 2001:A123:7CA1::15
+
+R# show ipv6 dhcp pool
+R# show ipv6 dhcp binding
+
+R(config)# ipv6 unicast routing
+R(config)# ipv6 dhcp pool LAN-10-STATELESS
+R(dhcpv6-config)# dns-server 2001:345:ACAD:F::5
+R(dhcpv6-config)# domain-name cisco.com
+
+R(config)# interface g1/1
+R(config-if)# ipv6 address 2001:A1B5:C13:10::1/64
+R(config-if)# ipv6 dhcp server LAN-10-STATELESS
+R(config-if)# ipv6 nd other-config-flag
+</div></code></pre>
+<hr>
+
+</body>
+</html>
